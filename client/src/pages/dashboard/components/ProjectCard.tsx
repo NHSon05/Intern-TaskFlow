@@ -1,7 +1,7 @@
 import TaskCard from "@/pages/dashboard/components/TaskCard";
 import { TASK_STATUSES, STATUS_DOT_STYLES } from "@/constants/taskStatus";
-import type { TaskRequest, TaskResponse } from "@/types/task.type";
-import { useCreateTask, useDeleteTask, useGetTasks, useUpdateTask } from "@/hooks/useTask";
+import type { TaskRequest, TaskResponse, TaskStatus } from "@/types/task.type";
+import { useCreateTask, useDeleteTask, useGetTasks, useUpdateTask, useUpdateTaskStatus } from "@/hooks/useTask";
 import { useMemo, useState } from "react";
 import TaskPopUp from "./TaskPopUp";
 import { toast } from "sonner";
@@ -26,6 +26,7 @@ export default function ProjectCard({
   const createTasks = useCreateTask(projectId);
   const updateTasks = useUpdateTask(projectId);
   const deleteTasks = useDeleteTask(projectId);
+  const updateTaskStatus = useUpdateTaskStatus(projectId);
 
   const [taskPopUpOpen, setTaskPopUpOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskResponse | null>(null);
@@ -84,14 +85,23 @@ export default function ProjectCard({
       console.error(error)
     }
   };
+
+  const handleUpdateStatus = async (taskId: number, status: TaskStatus) => {
+    try {
+      await updateTaskStatus.mutateAsync({ id: taskId, status });
+    } catch (error) {
+      toast.error("Failed to update task");
+      console.error(error)
+    }
+  };
   return (
     <>
-      <div className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-slate-950/20">
+      <div className="rounded-[32px] border border-slate-200/85 bg-white p-6 shadow-md shadow-slate-100/50">
         {/* Project header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-white">{projectName}</h2>
-            <p className="mt-1 text-sm text-slate-400">
+            <h2 className="text-2xl font-semibold text-slate-900">{projectName}</h2>
+            <p className="mt-1 text-sm text-slate-500">
               {tasks.length} task{tasks.length !== 1 ? "s" : ""}
             </p>
           </div>
@@ -101,7 +111,7 @@ export default function ProjectCard({
             <button
               type="button"
               onClick={handleOpenCreate}
-              className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-400"
+              className="inline-flex items-center gap-1.5 rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98] hover:bg-sky-400 focus-visible:ring-2 focus-visible:ring-sky-500/80 focus-visible:outline-none"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 5v14M5 12h14" />
@@ -113,7 +123,7 @@ export default function ProjectCard({
             <button
               type="button"
               onClick={onEditProject}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-600 transition-all duration-200 active:scale-95 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-sky-500/80 focus-visible:outline-none"
               aria-label="Edit project"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -126,7 +136,7 @@ export default function ProjectCard({
             <button
               type="button"
               onClick={onDeleteProject}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 transition hover:bg-rose-500/10 hover:text-rose-300"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-600 transition-all duration-200 active:scale-95 hover:bg-rose-50 hover:text-rose-600 focus-visible:ring-2 focus-visible:ring-rose-500/80 focus-visible:outline-none"
               aria-label="Delete project"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -144,23 +154,38 @@ export default function ProjectCard({
           {getTasksLoading ? (
             <div className="py-10 text-center text-sm text-slate-500">Loading tasks…</div>
           ) : tasks.length === 0 ? (
-            <div className="rounded-[26px] border border-dashed border-white/10 bg-slate-950/80 p-10 text-center text-sm text-slate-400">
-              No tasks yet. Click <strong className="text-white">Create Task</strong> to add one.
+            <div className="rounded-[26px] border border-dashed border-slate-200 bg-slate-50 p-10 text-center text-sm text-slate-500">
+              No tasks yet. Click <strong className="text-slate-800">Create Task</strong> to add one.
             </div>
           ) : (
             <div className="flex gap-6 overflow-x-auto h-[60vh] pb-4 custom-scrollbar">
               {TASK_STATUSES.map((status) => {
                 const statusTasks = tasksByStatus[status] ?? [];
+                const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+                  e.preventDefault();
+                };
+                const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+                  e.preventDefault();
+                  const droppedTaskId = e.dataTransfer.getData("taskId");
+                  if (droppedTaskId) {
+                    handleUpdateStatus(Number(droppedTaskId), status);
+                  }
+                };
                 return (
-                  <div key={status} className="space-y-4 min-w-[280px] sm:min-w-[320px] shrink-0">
+                  <div
+                    key={status}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="space-y-4 min-w-[280px] sm:min-w-[320px] shrink-0"
+                  >
                     <div className="flex items-center gap-2">
                       <div className={`h-2 w-2 rounded-full ${STATUS_DOT_STYLES[status]}`} />
-                      <h3 className="text-sm font-semibold text-slate-300">{status}</h3>
-                      <span className="text-xs text-slate-500">({statusTasks.length})</span>
+                      <h3 className="text-sm font-semibold text-slate-600">{status}</h3>
+                      <span className="text-xs text-slate-400">({statusTasks.length})</span>
                     </div>
                     <div className="space-y-3 overflow-y-auto max-h-[50vh] pr-2 custom-scrollbar">
                       {statusTasks.length === 0 ? (
-                        <div className="rounded-lg border border-dashed border-white/5 bg-slate-950/50 p-4 text-center text-xs text-slate-500">
+                        <div className="rounded-lg border border-dashed border-slate-200/60 bg-slate-50/50 p-4 text-center text-xs text-slate-400">
                           No tasks
                         </div>
                       ) : (

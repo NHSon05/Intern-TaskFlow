@@ -15,18 +15,18 @@ export default function Sidebar() {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
       isActive
-        ? "bg-slate-900 text-slate-100 shadow-sm shadow-sky-500/10"
-        : "text-slate-400 hover:bg-slate-900 hover:text-white"
+        ? "bg-sky-50 text-sky-600 shadow-sm shadow-sky-500/5 font-semibold"
+        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
     }`;
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 shrink-0 flex-col border-r border-white/5 bg-black px-6 py-8 shadow-2xl md:flex">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 shrink-0 flex-col border-r border-slate-200/80 bg-white px-6 py-8 shadow-sm md:flex">
       <div className="flex flex-col gap-3">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 shadow-inner shadow-sky-500/5">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-sky-100 text-sky-600 shadow-inner shadow-sky-500/5">
           <span className="text-lg font-semibold">T</span>
         </span>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-slate-400/80">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
             TaskFlow
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function Sidebar() {
             to={item.to}
             className={({ isActive }) => navLinkClass({ isActive: getIsActive(item, isActive) })}
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-300 transition group-hover:text-white">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-400 transition group-hover:text-slate-700 group-[.active]:text-sky-600">
               {item.icon}
             </span>
             {item.label}
@@ -48,14 +48,14 @@ export default function Sidebar() {
       </nav>
 
       <div className="mt-auto">
-        <div className="mb-3 border-t border-white/5" />
+        <div className="mb-3 border-t border-slate-100" />
         <nav className="space-y-1">
           {/* Setting */}
           <NavLink
             to={settingItem.to}
             className={({ isActive }) => navLinkClass({ isActive: getIsActive(settingItem, isActive) })}
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-300 transition group-hover:text-white">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-400 transition group-hover:text-slate-700">
               {settingItem.icon}
             </span>
             {settingItem.label}
@@ -65,9 +65,9 @@ export default function Sidebar() {
           <button
             onClick={() => logout.mutate()}
             disabled={logout.isPending}
-            className="group flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-slate-400 transition hover:bg-red-500/10 hover:text-red-400 disabled:opacity-50"
+            className="group flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-slate-500 transition hover:bg-rose-50 hover:text-rose-600 disabled:opacity-50"
           >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-300 transition group-hover:text-red-400">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-slate-400 transition group-hover:text-rose-500">
               {logoutIcon}
             </span>
             {logout.isPending ? "Logging out…" : "Logout"}

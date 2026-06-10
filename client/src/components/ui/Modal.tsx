@@ -27,7 +27,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
       <div
-        className={`absolute inset-0 bg-slate-950/85 transition-opacity duration-200 ${
+        className={`absolute inset-0 bg-slate-900/45 transition-opacity duration-200 ${
           open ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
@@ -37,7 +37,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="create-task-title"
-        className={`relative z-10 w-full max-w-2xl transform rounded-[28px] border border-white/10 bg-slate-950/95 p-6 shadow-2xl shadow-slate-950/40 transition duration-200 ease-out ${
+        className={`relative z-10 w-full max-w-2xl transform rounded-[28px] border border-slate-200 bg-white p-6 shadow-2xl transition duration-200 ease-out ${
           open ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >
@@ -45,11 +45,11 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           <div>
             <h2
               id="create-task-title"
-              className="text-lg font-semibold text-white"
+              className="text-lg font-semibold text-slate-900"
             >
               {title}
             </h2>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-slate-500">
               Add a new task with priority and due date details.
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/80 text-slate-400 transition hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
             aria-label="Close modal"
           >
             <svg

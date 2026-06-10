@@ -5,7 +5,22 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { NewTaskPayload, Task } from "../types/task.type";
+export interface Task {
+  id: string;
+  title: string;
+  description: string;
+  dueDate: string;
+  category: string;
+  status: string;
+}
+
+export interface NewTaskPayload {
+  title: string;
+  description: string;
+  dueDate: string;
+  category: string;
+  status?: string;
+}
 
 interface TaskContextValue {
   tasks: Task[];

@@ -72,7 +72,7 @@ const navigate = useNavigate();
           toast.error("Register failed")
         }
       })
-    } catch (error) {
+    } catch (error: any) {
       setErrors((prev) => ({
         ...prev,
         serverError: error?.data?.message || "Đăng ký thất bại. Vui lòng kiểm tra lại thông tin!"
@@ -82,11 +82,11 @@ const navigate = useNavigate();
     }
   };
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute left-[-10%] top-[-10%] h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute left-[-10%] top-[-10%] h-72 w-72 rounded-full bg-sky-500/5 blur-3xl" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-72 w-72 rounded-full bg-cyan-500/5 blur-3xl" />
       </div>
 
       <AuthHeader currentPage="register" />
@@ -97,11 +97,11 @@ const navigate = useNavigate();
             title="Create an account"
             subtitle="Start managing your tasks with TaskFlow"
             footer={
-              <p className="text-center text-sm text-slate-400">
+              <p className="text-center text-sm text-slate-500">
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-medium text-sky-400 transition hover:text-sky-300"
+                  className="font-medium text-sky-600 transition hover:text-sky-700"
                 >
                   Sign in
                 </Link>
@@ -152,7 +152,7 @@ const navigate = useNavigate();
 
               <button
                 type="submit"
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl bg-sky-500 px-5 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(14,165,233,0.35)] focus:outline-none focus:ring-2 focus:ring-sky-400/40"
+                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-2xl bg-sky-500 px-5 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98] hover:bg-sky-400 hover:shadow-[0_0_30px_rgba(14,165,233,0.35)] focus-visible:ring-2 focus-visible:ring-sky-500/80 focus-visible:outline-none"
               >
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>

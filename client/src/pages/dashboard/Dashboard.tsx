@@ -61,7 +61,7 @@ export default function Dashboard() {
   if (isLoading) return <div>Đang tải danh sách...</div>;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900">
       <Sidebar />
 
       <main className="min-h-screen md:ml-72">
@@ -72,9 +72,9 @@ export default function Dashboard() {
         <div className="mx-auto max-w-10xl px-4 py-8 md:px-8">
           {isLoading ? (
             <div className="py-20 text-center text-slate-500">Loading projects…</div>
-          ) : projects.length === 0 ? (
-            <div className="rounded-[32px] border border-dashed border-white/10 bg-slate-900/40 p-20 text-center">
-              <p className="text-slate-400">No projects yet.</p>
+          ) : !projects || projects.length === 0 ? (
+            <div className="rounded-[32px] border border-dashed border-slate-200 bg-white p-20 text-center shadow-sm">
+              <p className="text-slate-500">No projects yet.</p>
               <button
                 type="button"
                 onClick={() => { setEditingProject(null); setProjectPopUpOpen(true); }}

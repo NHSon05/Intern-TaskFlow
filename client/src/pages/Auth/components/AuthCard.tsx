@@ -14,15 +14,15 @@ const AuthCard = ({
   footer,
 }: AuthCardProps) => {
   return (
-    <div className="relative w-full max-w-[420px] rounded-[28px] border border-white/10 bg-slate-950/95 p-8 shadow-[0_40px_120px_-50px_rgba(0,0,0,0.85)] backdrop-blur-3xl sm:p-10">
+    <div className="relative w-full max-w-[420px] rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-xl sm:p-10">
       <div className=" text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.55em] text-sky-300/80 sm:text-sm">
+        <p className="text-xs font-bold uppercase tracking-[0.55em] text-sky-600 sm:text-sm">
           TaskFlow
         </p>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-[2.4rem]">
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-[2.4rem]">
           {title}
         </h1>
-        <p className="mx-auto mt-3 max-w-[320px] text-sm leading-6 text-slate-400 sm:text-base">
+        <p className="mx-auto mt-3 max-w-[320px] text-sm leading-6 text-slate-500 sm:text-base">
           {subtitle}
         </p>
       </div>
@@ -30,7 +30,7 @@ const AuthCard = ({
       <div className="mt-10 space-y-4">{children}</div>
 
       {footer ? (
-        <div className="mt-8 text-center text-sm text-slate-400">{footer}</div>
+        <div className="mt-8 text-center text-sm text-slate-500">{footer}</div>
       ) : null}
     </div>
   );
