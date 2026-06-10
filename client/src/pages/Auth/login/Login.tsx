@@ -45,7 +45,7 @@ export default function Login() {
       await login.mutateAsync(values)
       toast.success("Login successfully")
       navigate('/dashboard')
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Login failed, email or password is incorrect")
       setErrors((prev) => ({
         ...prev,
@@ -57,21 +57,21 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black text-slate-100">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900">
       <AuthHeader currentPage="login" />
 
-      <div className="absolute inset-x-0 top-0 h-72 bg-black" />
+      <div className="absolute inset-x-0 top-0 h-72 bg-slate-100/40" />
       <main className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center px-6 py-20 sm:px-8 sm:py-24">
         <div className="w-full max-w-[420px] mx-auto ">
           <AuthCard
             title="Welcome back"
             subtitle="Sign in to your TaskFlow account"
             footer={
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-500">
                 Don&apos;t have an account?{" "}
                 <Link
                   to="/register"
-                  className="font-semibold text-sky-300 transition hover:text-sky-200"
+                  className="font-semibold text-sky-600 transition hover:text-sky-700"
                 >
                   Sign up
                 </Link>
@@ -103,7 +103,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="inline-flex w-full items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:bg-sky-400"
+                className="inline-flex w-full items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition-all duration-200 active:scale-[0.98] hover:bg-sky-400 focus-visible:ring-2 focus-visible:ring-sky-500/80 focus-visible:outline-none"
               >
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>

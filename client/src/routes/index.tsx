@@ -17,7 +17,7 @@ const AppRoutes: React.FC = () => {
     <BrowserRouter>
       <Suspense
         fallback={
-          <div className="flex items-center justify-center h-screen text-2xl font-semibold text-slate-200">
+          <div className="flex items-center justify-center h-screen text-2xl font-semibold text-slate-500">
             Loading...
           </div>
         }

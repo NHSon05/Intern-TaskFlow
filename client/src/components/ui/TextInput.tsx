@@ -23,7 +23,7 @@ const TextInput = ({
 }: TextInputProps) => {
   return (
     <label className="block space-y-2 text-sm">
-      <span className="font-medium text-slate-300">{label}</span>
+      <span className="font-medium text-slate-700">{label}</span>
       <input
         name={name}
         type={type}
@@ -31,9 +31,9 @@ const TextInput = ({
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={onChange}
-        className="h-14 w-full rounded-full border border-slate-700/80 bg-white/5 px-5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition duration-200 ease-in-out focus:border-sky-400 focus:ring-2 focus:ring-sky-500/15"
+        className="h-14 w-full rounded-full border border-slate-200 bg-slate-50 px-5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition duration-200 ease-in-out focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-500/15"
       />
-      {error ? <p className="text-sm text-rose-400">{error}</p> : null}
+      {error ? <p className="text-sm text-rose-500">{error}</p> : null}
     </label>
   );
 };

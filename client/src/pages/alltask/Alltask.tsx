@@ -61,19 +61,19 @@ export default function AllTasks() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900">
       <Sidebar />
       <main className="min-h-screen md:ml-72">
-        <div className="border-b border-white/10 px-4 py-4 shadow-sm shadow-slate-950/10 md:px-8">
+        <div className="border-b border-slate-200/80 bg-white/80 backdrop-blur-md px-4 py-4 shadow-sm shadow-slate-100/10 md:px-8">
           <div className="mx-auto flex max-w-10xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-sky-300/80">
+              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-sky-600">
                 All Tasks
               </p>
-              <h1 className="mt-3 text-3xl font-semibold text-white">
+              <h1 className="mt-3 text-3xl font-semibold text-slate-900">
                 Manage your entire task list.
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">
                 Filter, search, and edit tasks from the centralized task board.
               </p>
             </div>
@@ -81,9 +81,9 @@ export default function AllTasks() {
         </div>
 
         <div className="mx-auto max-w-10xl px-4 py-8 md:px-8">
-          <div className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-slate-950/20">
+          <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-md shadow-slate-100/50">
             <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <span className="inline-flex rounded-full bg-slate-800/70 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-300">
+              <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-600 font-semibold">
                 {tasks.length} tasks
               </span>
             </div>
@@ -100,7 +100,7 @@ export default function AllTasks() {
 
             <div className="space-y-4">
               {tasks.length === 0 ? (
-                <div className="rounded-[26px] border border-dashed border-white/10 bg-slate-950/80 p-10 text-center text-sm text-slate-400">
+                <div className="rounded-[26px] border border-dashed border-slate-200 bg-slate-50 p-10 text-center text-sm text-slate-500">
                   No tasks match your filters. Create a new task to see it here.
                 </div>
               ) : (

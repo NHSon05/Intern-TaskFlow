@@ -6,13 +6,13 @@ interface AuthHeaderProps {
 
 const AuthHeader = ({ currentPage }: AuthHeaderProps) => {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-black/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
         <Link
           to="/login"
-          className="flex items-center gap-3 text-white transition hover:text-sky-200"
+          className="flex items-center gap-3 text-slate-800 transition hover:text-sky-600"
         >
-          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-sky-500/10 text-sky-300 ring-1 ring-sky-300/30 shadow-[0_0_0_1px_rgba(56,189,248,0.1)]">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-sky-100 text-sky-600 ring-1 ring-sky-200 shadow-[0_0_0_1px_rgba(14,165,233,0.05)]">
             ✓
           </span>
           <span className="text-base font-semibold tracking-tight sm:text-lg">
@@ -25,18 +25,18 @@ const AuthHeader = ({ currentPage }: AuthHeaderProps) => {
             to="/login"
             className={`font-medium transition ${
               currentPage === "login"
-                ? "text-white"
-                : "text-slate-300 hover:text-white"
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
             }`}
           >
             Login
           </Link>
           <Link
             to="/register"
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold shadow-lg transition ${
+            className={`rounded-full px-5 py-2.5 text-sm font-semibold shadow-md transition ${
               currentPage === "register"
-                ? "bg-white text-slate-950 shadow-slate-800/20 hover:bg-slate-100"
-                : "bg-sky-500 text-white shadow-sky-500/20 hover:bg-sky-400"
+                ? "bg-slate-900 text-white shadow-slate-900/10 hover:bg-slate-800"
+                : "bg-sky-500 text-white shadow-sky-500/10 hover:bg-sky-400"
             }`}
           >
             Register
