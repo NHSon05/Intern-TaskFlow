@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,6 +24,7 @@ model User {
   role      String    @default("USER")
   active    Boolean   @default(false)
   avatar    String?
+  preferences Json?     // Thực hành kiểu JSONB
   tasks     Task[]
   projects  Project[]
   createdAt DateTime  @default(now())
@@ -44,6 +45,7 @@ model Task {
   id           Int           @id @default(autoincrement())
   title        String        @db.VarChar(255)
   description  String?       @db.Text
+  tags         String[]      // Thực hành kiểu Array
   status       TaskStatus    @default(NEW)
   scheduleDate DateTime?
   dueDate      DateTime?
